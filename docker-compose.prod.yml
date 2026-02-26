@@ -1,0 +1,87 @@
+# docker-compose.prod.yml
+# Production deployment for adventures-travel-time.com
+# Frontend: port 5173, Backend: port 9001
+# Usage: docker-compose -f docker-compose.prod.yml up --build -d
+
+services:
+  # ── PostgreSQL Database ────────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: travel_user
+      POSTGRES_PASSWORD: travel_pass
+      POSTGRES_DB: travel_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U travel_user -d travel_db" ]
+      interval: 5s
+      retries: 5
+
+  # ── Redis (Celery Broker) ──────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    restart: always
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      retries: 5
+
+  # ── FastAPI Backend (port 9001) ────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "9001:8000"
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://travel_user:travel_pass@db:5432/travel_db
+      REDIS_URL: redis://redis:6379/0
+      DEBUG: "false"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - uploads_data:/app/uploads
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
+
+  # ── Celery Worker ──────────────────────────────────────────────
+  celery-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://travel_user:travel_pass@db:5432/travel_db
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - uploads_data:/app/uploads
+    command: celery -A app.tasks.celery_app:celery_app worker --loglevel=info --concurrency=4
+
+  # ── Vue 3 Frontend (port 5173) ─────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    restart: always
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  uploads_data:
