@@ -26,3 +26,6 @@ uploads/
 
 # Logs
 *.log
+
+# SSL certificates
+certbot/

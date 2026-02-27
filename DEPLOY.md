@@ -4,14 +4,7 @@
 - **OS:** Ubuntu 22.04+
 - **RAM:** 2GB+
 - **Docker** + **Docker Compose** installed
-- **Nginx** installed on server (for SSL + reverse proxy)
 - **Domain:** `adventures-travel-time.com` → server IP (A record)
-
-## Ports Used
-| Service | Port |
-|---------|------|
-| Frontend | 5173 |
-| Backend API | 9001 |
 
 ---
 
@@ -34,32 +27,23 @@ nano backend/.env   # Change ADMIN_PASSWORD!
 
 ---
 
-## Step 3: Start Services
+## Step 3: Start All Services (One Command!)
 
 ```bash
 docker-compose -f docker-compose.prod.yml up --build -d
 ```
 
+✅ Site is now live at `http://adventures-travel-time.com`
+
 ---
 
-## Step 4: Setup Server Nginx + SSL
+## Step 4: Enable SSL (HTTPS)
 
-**4a. Copy nginx config:**
 ```bash
-cp nginx/nginx.conf /etc/nginx/sites-available/adventures-travel-time.com
-ln -s /etc/nginx/sites-available/adventures-travel-time.com /etc/nginx/sites-enabled/
+bash ssl-init.sh
 ```
 
-**4b. Get SSL certificate:**
-```bash
-apt install certbot python3-certbot-nginx -y
-certbot --nginx -d adventures-travel-time.com -d www.adventures-travel-time.com
-```
-
-**4c. Restart nginx:**
-```bash
-nginx -t && systemctl restart nginx
-```
+✅ Site is now live at `https://adventures-travel-time.com`
 
 ---
 
@@ -72,34 +56,41 @@ curl -I https://adventures-travel-time.com
 
 ---
 
+## Architecture
+
+```
+Client → Nginx container (80/443)
+           ├── /        → Frontend container (Vue SPA)
+           └── /api/    → Backend container (FastAPI)
+
+Docker internal network:
+  Nginx ──→ Frontend (Nginx:80)
+  Nginx ──→ Backend (Uvicorn:9000)
+  Backend → PostgreSQL + Redis
+  Celery Worker → Redis → PostgreSQL
+```
+
+---
+
 ## Useful Commands
 
 ```bash
-# Restart
+# Restart all
 docker-compose -f docker-compose.prod.yml down
 docker-compose -f docker-compose.prod.yml up --build -d
 
 # Logs
+docker-compose -f docker-compose.prod.yml logs -f nginx
 docker-compose -f docker-compose.prod.yml logs -f backend
 docker-compose -f docker-compose.prod.yml logs -f celery-worker
 
 # DB Backup
 docker-compose -f docker-compose.prod.yml exec db pg_dump -U travel_user travel_db > backup.sql
 
-# Update
+# Update code
 git pull && docker-compose -f docker-compose.prod.yml up --build -d
-```
 
----
-
-## Architecture
-
-```
-Client → Server Nginx (80/443 SSL)
-           ├── / → localhost:5173 (Frontend container)
-           └── /api/ → localhost:9001 (Backend container)
-
-Docker internal:
-  Frontend (Nginx:80) ──proxy──→ Backend:8000
-  Celery Worker → Redis → PostgreSQL
+# Renew SSL certificate
+docker-compose -f docker-compose.prod.yml run --rm certbot renew
+docker-compose -f docker-compose.prod.yml restart nginx
 ```
