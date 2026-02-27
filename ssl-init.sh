@@ -13,7 +13,7 @@ EMAIL="shohruxnasriddinov98@gmail.com"
 echo "🔐 Getting SSL certificate for $DOMAIN..."
 
 # Step 1: Get SSL certificate via certbot
-docker-compose -f docker-compose.prod.yml run --rm certbot certonly \
+docker compose -f docker-compose.prod.yml run --rm certbot certonly \
     --webroot \
     --webroot-path=/var/www/certbot \
     -d $DOMAIN \
@@ -28,7 +28,7 @@ cp nginx/nginx.ssl.conf nginx/nginx.prod.conf
 
 # Step 3: Restart nginx to apply SSL
 echo "🔄 Restarting nginx..."
-docker-compose -f docker-compose.prod.yml restart nginx
+docker compose -f docker-compose.prod.yml restart nginx
 
 echo "✅ SSL setup complete! Site is now available at https://$DOMAIN"
 echo ""
