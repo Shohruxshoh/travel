@@ -27,7 +27,7 @@
       </table>
     </div>
 
-    <div v-if="showModal" class="modal-overlay" @click.self="showModal=false">
+    <div v-show="showModal" class="modal-overlay">
       <div class="modal-content">
         <div class="modal-header">
           <h2>{{ editing ? 'Edit Operator' : 'Add Operator' }}</h2>

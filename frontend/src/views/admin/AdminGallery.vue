@@ -30,7 +30,7 @@
     </div>
 
     <!-- Modal -->
-    <div v-if="showModal" class="modal-overlay" @click.self="showModal=false">
+    <div v-show="showModal" class="modal-overlay">
       <div class="modal-content" style="max-width:520px;">
         <div class="modal-header">
           <h2>{{ editing ? 'Edit Media' : 'Add Media' }}</h2>
