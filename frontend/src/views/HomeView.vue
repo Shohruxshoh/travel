@@ -79,7 +79,12 @@
             </div>
             <p class="card-text">{{ truncate(getField(tour, 'description'), 100) }}</p>
             <div class="card-footer">
-              <span class="card-price">€{{ tour.price }} <small>/ {{ $t('tours.perPerson') }}</small></span>
+              <span class="card-price">
+                <template v-if="tour.is_negotiable">
+                  <span style="background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">{{ $t('tours.negotiable') }}</span>
+                </template>
+                <template v-else>€{{ tour.price }} <small>/ {{ $t('tours.perPerson') }}</small></template>
+              </span>
               <span class="btn btn-primary btn-sm">{{ $t('tours.viewDetails') }}</span>
             </div>
           </div>
@@ -132,6 +137,11 @@
               <span class="dest-modal-tagline">{{ activeDest.tagline }}</span>
               <h2>{{ activeDest.name }}</h2>
               <p class="dest-modal-desc">{{ activeDest.description }}</p>
+              <div v-if="activeDest.fullText" class="dest-modal-full">
+                <p v-for="(paragraph, i) in activeDest.fullText.split('\n\n')" :key="i" class="dest-modal-paragraph">
+                  {{ paragraph }}
+                </p>
+              </div>
               <div class="dest-modal-highlights">
                 <div v-for="h in activeDest.highlights" :key="h" class="dest-modal-highlight">
                   <span class="dest-highlight-icon">✦</span>
@@ -223,7 +233,7 @@ let slideTimer = null
 const heroSlides = computed(() => [
   {
     image: '/monuments/hero_khiva.jpg',
-    label: 'Adventures Travel Time',
+    label: 'Silk Road Trip',
     title: t('hero.title'),
     subtitle: t('hero.subtitle'),
   },
@@ -258,7 +268,8 @@ const destinations = computed(() => [
   {
     name: t('home.destSamarkand'),
     tagline: t('home.destSamarkandTag'),
-    description: t('home.destSamarkandDesc'),
+    description: t('destinations.samarkandDesc'),
+    fullText: t('destinations.samarkandFull'),
     image: '/monuments/registon.png',
     highlights: [
       t('home.destSamarkandH1'),
@@ -269,7 +280,8 @@ const destinations = computed(() => [
   {
     name: t('home.destBukhara'),
     tagline: t('home.destBukharaTag'),
-    description: t('home.destBukharaDesc'),
+    description: t('destinations.bukharaDesc'),
+    fullText: t('destinations.bukharaFull'),
     image: '/monuments/ark_fortress.png',
     highlights: [
       t('home.destBukharaH1'),
@@ -280,7 +292,8 @@ const destinations = computed(() => [
   {
     name: t('home.destKhiva'),
     tagline: t('home.destKhivaTag'),
-    description: t('home.destKhivaDesc'),
+    description: t('destinations.khivaDesc'),
+    fullText: t('destinations.khivaFull'),
     image: '/monuments/ichan_kala.png',
     highlights: [
       t('home.destKhivaH1'),
@@ -291,7 +304,8 @@ const destinations = computed(() => [
   {
     name: t('home.destTashkent'),
     tagline: t('home.destTashkentTag'),
-    description: t('home.destTashkentDesc'),
+    description: t('destinations.tashkentDesc'),
+    fullText: t('destinations.tashkentFull'),
     image: '/monuments/minor_mosque.png',
     highlights: [
       t('home.destTashkentH1'),

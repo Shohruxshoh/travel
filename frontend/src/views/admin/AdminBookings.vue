@@ -9,10 +9,11 @@
 
     <div class="admin-table-wrapper">
       <table class="admin-table">
-        <thead><tr><th>ID</th><th>Customer</th><th>Email</th><th>Phone</th><th>Language</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+        <thead><tr><th>ID</th><th>Tour</th><th>Customer</th><th>Email</th><th>Phone</th><th>Language</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
         <tbody>
           <tr v-for="b in items" :key="b.id">
             <td>#{{ b.id }}</td>
+            <td><router-link :to="`/tours/${b.tour_id}`" style="font-weight:500; color:var(--primary); text-decoration:none;" target="_blank">{{ b.tour_title || 'Tour #' + b.tour_id }}</router-link></td>
             <td>{{ b.customer_name }}</td>
             <td>{{ b.customer_email }}</td>
             <td>{{ b.customer_phone || '-' }}</td>
@@ -35,7 +36,7 @@
               <button class="btn btn-danger btn-sm" @click="remove(b.id)">Delete</button>
             </td>
           </tr>
-          <tr v-if="!items.length"><td colspan="8" style="text-align:center; color:var(--text-tertiary); padding:24px;">No bookings yet.</td></tr>
+          <tr v-if="!items.length"><td colspan="9" style="text-align:center; color:var(--text-tertiary); padding:24px;">No bookings yet.</td></tr>
         </tbody>
       </table>
     </div>

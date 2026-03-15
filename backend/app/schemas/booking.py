@@ -3,8 +3,8 @@ Pydantic schemas for Bookings.
 Includes the critical 'language' field for smart email routing.
 """
 
-from pydantic import BaseModel, Field, EmailStr
-from typing import Optional
+from pydantic import BaseModel, Field, EmailStr, model_validator
+from typing import Optional, Any
 from datetime import datetime
 
 
@@ -30,6 +30,7 @@ class BookingResponse(BaseModel):
     """Schema for booking response."""
     id: int
     tour_id: int
+    tour_title: Optional[str] = None
     customer_name: str
     customer_email: str
     customer_phone: Optional[str] = None
@@ -39,6 +40,14 @@ class BookingResponse(BaseModel):
     created_at: Optional[datetime] = None
 
     model_config = {"from_attributes": True}
+
+    @model_validator(mode="before")
+    @classmethod
+    def extract_tour_title(cls, data: Any) -> Any:
+        """Extract tour title from the loaded tour relationship."""
+        if hasattr(data, "tour") and data.tour:
+            data.tour_title = data.tour.title_en or ""
+        return data
 
 
 class OperatorConfigBase(BaseModel):

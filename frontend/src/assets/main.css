@@ -1,5 +1,5 @@
 /**
- * Adventures Travel Time — Premium Design System
+ * Silk Road Trip — Premium Design System
  * Inspired by uzbektravel.fr: professional travel agency aesthetic
  * Features: Dark/Light mode, glassmorphism, hero carousel, premium cards
  */
@@ -3214,6 +3214,24 @@ video {
   font-size: 0.92rem;
   line-height: 1.7;
   margin: 4px 0 8px;
+}
+
+.dest-modal-full {
+  margin: 4px 0 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-light);
+}
+
+.dest-modal-paragraph {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.75;
+  margin: 0 0 12px;
+  text-align: justify;
+}
+
+.dest-modal-paragraph:last-child {
+  margin-bottom: 0;
 }
 
 .dest-modal-highlights {

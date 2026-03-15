@@ -1,5 +1,5 @@
 # docker-compose.prod.yml
-# Production deployment for adventures-travel-time.com
+# Production deployment for silk-road-trip.com
 # Usage: docker-compose -f docker-compose.prod.yml up --build -d
 
 services:

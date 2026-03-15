@@ -9,7 +9,7 @@
       <div class="login-header">
         <div class="login-icon">🔐</div>
         <h1>Admin Panel</h1>
-        <p>Adventures Travel Time</p>
+        <p>Silk Road Trip</p>
       </div>
 
       <form @submit.prevent="handleLogin" class="login-form">

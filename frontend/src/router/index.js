@@ -47,6 +47,11 @@ const routes = [
         name: 'Monuments',
         component: () => import('../views/MonumentsView.vue'),
     },
+    {
+        path: '/destinations',
+        name: 'Destinations',
+        component: () => import('../views/DestinationsView.vue'),
+    },
     // ─── Admin Login (public) ───
     {
         path: '/admin/login',

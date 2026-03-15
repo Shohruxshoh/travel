@@ -15,6 +15,7 @@
             <th>ID</th>
             <th>Image</th>
             <th>Title (EN)</th>
+            <th>Category</th>
             <th>Destination</th>
             <th>Price</th>
             <th>Days</th>
@@ -27,8 +28,9 @@
             <td>#{{ t.id }}</td>
             <td><img v-if="t.cover_image" :src="t.cover_image" class="admin-thumb" /><span v-else class="admin-thumb-empty">📷</span></td>
             <td>{{ t.title_en }}</td>
+            <td><span class="status-badge" :class="t.category === 'full' ? 'status-active' : 'status-pending'">{{ t.category === 'full' ? 'To\'liq tur' : 'Qo\'shimcha' }}</span></td>
             <td>{{ t.destination }}</td>
-            <td>€{{ t.price }}</td>
+            <td>{{ t.is_negotiable ? 'Kelishiladi' : '€' + t.price }}</td>
             <td>{{ t.duration_days }}</td>
             <td><span class="status-badge" :class="t.is_active ? 'status-active' : 'status-inactive'">{{ t.is_active ? 'Active' : 'Inactive' }}</span></td>
             <td>
@@ -36,7 +38,7 @@
               <button class="btn btn-danger btn-sm" @click="remove(t.id)" style="margin-left:6px;">Delete</button>
             </td>
           </tr>
-          <tr v-if="!items.length"><td colspan="8" style="text-align:center; color:var(--text-tertiary); padding:24px;">No tours yet. Click "Add Tour" to create one.</td></tr>
+          <tr v-if="!items.length"><td colspan="9" style="text-align:center; color:var(--text-tertiary); padding:24px;">No tours yet. Click "Add Tour" to create one.</td></tr>
         </tbody>
       </table>
     </div>
@@ -69,7 +71,21 @@
             <div class="form-group"><label class="form-label">Title (RU)</label><input v-model="form.title_ru" class="form-input" required /></div>
             <div class="form-group"><label class="form-label">Title (EN)</label><input v-model="form.title_en" class="form-input" required /></div>
             <div class="form-group"><label class="form-label">Title (FR)</label><input v-model="form.title_fr" class="form-input" required /></div>
-            <div class="form-group"><label class="form-label">Price (€)</label><input v-model.number="form.price" type="number" class="form-input" required min="1" /></div>
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select v-model="form.category" class="form-input">
+                <option value="full">To'liq tur</option>
+                <option value="extra">Qo'shimcha tur</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Narx turi</label>
+              <label style="display:flex; align-items:center; gap:8px; cursor:pointer; margin-top:8px;">
+                <input type="checkbox" v-model="form.is_negotiable" style="width:18px; height:18px; cursor:pointer;" />
+                <span>Kelishiladi</span>
+              </label>
+            </div>
+            <div class="form-group" v-if="!form.is_negotiable"><label class="form-label">Price (€)</label><input v-model.number="form.price" type="number" class="form-input" required min="1" /></div>
             <div class="form-group"><label class="form-label">Duration (days)</label><input v-model.number="form.duration_days" type="number" class="form-input" required min="1" /></div>
           </div>
           <div class="form-group"><label class="form-label">Description (RU)</label><textarea v-model="form.description_ru" class="form-input form-textarea"></textarea></div>
@@ -104,7 +120,7 @@ const imagePreview = ref(null)
 const uploading = ref(false)
 
 function getEmpty() {
-  return { title_ru:'',title_en:'',title_fr:'',description_ru:'',description_en:'',description_fr:'',price:100,duration_days:7,destination:'',cover_image:'',is_active:true }
+  return { title_ru:'',title_en:'',title_fr:'',description_ru:'',description_en:'',description_fr:'',category:'full',price:100,is_negotiable:false,duration_days:7,destination:'',cover_image:'',is_active:true }
 }
 
 async function load() {

@@ -8,6 +8,7 @@ All endpoints require JWT authentication via the require_admin dependency.
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
 
 from app.database import get_db
 from app.auth import require_admin
@@ -230,7 +231,12 @@ async def admin_delete_blog(article_id: int, db: AsyncSession = Depends(get_db))
 # ═══════════════════════════════════════════════════
 @router.get("/bookings", response_model=list[BookingResponse])
 async def admin_list_bookings(db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Booking).order_by(Booking.created_at.desc()).limit(200))
+    result = await db.execute(
+        select(Booking)
+        .options(selectinload(Booking.tour))
+        .order_by(Booking.created_at.desc())
+        .limit(200)
+    )
     return result.scalars().all()
 
 

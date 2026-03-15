@@ -28,8 +28,18 @@ class TourPackage(Base):
     description_en = Column(Text, nullable=False, comment="Full description in English")
     description_fr = Column(Text, nullable=False, comment="Full description in French")
 
+    # ── Tour category ─────────────────────────────────────────────
+    category = Column(
+        String(20), nullable=False, default="full",
+        comment="Tour type: 'full' (full tour) or 'extra' (additional tour)"
+    )
+
     # ── Tour details ─────────────────────────────────────────────
-    price = Column(Numeric(10, 2), nullable=False, comment="Price in USD")
+    price = Column(Numeric(10, 2), nullable=True, comment="Price in EUR, NULL if negotiable")
+    is_negotiable = Column(
+        Boolean, default=False, nullable=False,
+        comment="If true, price is 'negotiable' instead of fixed"
+    )
     duration_days = Column(Integer, nullable=False, comment="Duration in days")
     destination = Column(String(255), nullable=False, comment="Destination city/country")
 

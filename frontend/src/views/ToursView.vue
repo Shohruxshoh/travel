@@ -11,11 +11,15 @@
         <router-link v-for="tour in tours" :key="tour.id" :to="`/tours/${tour.id}`" class="card" style="text-decoration:none; color:inherit;">
           <div class="card-image" :style="tour.cover_image ? { backgroundImage: `url(${tour.cover_image})`, backgroundSize: 'cover', backgroundPosition: 'center' } : (tour.images_json?.length ? { backgroundImage: `url(${tour.images_json[0]})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {})"></div>
           <div class="card-body">
+            <div style="display:flex; gap:6px; margin-bottom:8px;">
+              <span style="font-size:0.75rem; padding:2px 8px; border-radius:12px; font-weight:600;" :style="tour.category === 'full' ? 'background:#10b981; color:#fff;' : 'background:#f59e0b; color:#fff;'">{{ tour.category === 'full' ? $t('tours.fullTour') : $t('tours.extraTour') }}</span>
+            </div>
             <h3 class="card-title">{{ getField(tour, 'title') }}</h3>
             <p class="card-text">{{ truncate(getField(tour, 'description'), 120) }}</p>
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <span class="card-price">
-                €{{ tour.price }} <span>/ {{ $t('tours.perPerson') }}</span>
+                <template v-if="tour.is_negotiable">{{ $t('tours.negotiable') }}</template>
+                <template v-else>€{{ tour.price }} <span>/ {{ $t('tours.perPerson') }}</span></template>
               </span>
               <span style="color: var(--gray-400); font-size: 0.85rem;">{{ tour.duration_days }} {{ $t('tours.duration') }}</span>
             </div>

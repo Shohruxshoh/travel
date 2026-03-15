@@ -18,7 +18,7 @@
       <div class="footer-grid">
         <!-- Brand Column -->
         <div class="footer-col">
-          <h4>✈️ Adventures Travel Time</h4>
+          <h4>✈️ Silk Road Trip</h4>
           <p class="footer-brand-desc">
             {{ $t('footer.desc') }}
           </p>
@@ -54,9 +54,11 @@
         <div class="footer-col">
           <h4>{{ $t('footer.contactTitle') }}</h4>
           <ul>
-            <li>📞 +998 90 123 45 67</li>
-            <li>✉️ info@adventurestraveltime.com</li>
-            <li>📍 Tashkent, Uzbekistan</li>
+            <li>📞 +998 91 244 07 76</li>
+            <li>📞 +998 99 141 07 76</li>
+            <li>✉️ sanjok_fra@inbox.ru</li>
+            <li>✉️ sanjarb0985@gmail.com</li>
+            <li>📍 Bukhara, Uzbekistan</li>
           </ul>
         </div>
       </div>

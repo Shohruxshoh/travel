@@ -1,12 +1,12 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════
-# SSL Certificate Setup for adventures-travel-time.com
+# SSL Certificate Setup for silk-road-trip.com
 # Run this AFTER docker-compose is up and running
 # ═══════════════════════════════════════════════════════════════
 
 set -e
 
-DOMAIN="adventures-travel-time.com"
+DOMAIN="silk-road-trip.com"
 EMAIL="shohruxnasriddinov98@gmail.com"
 
 echo "🔐 Getting SSL certificate for $DOMAIN..."

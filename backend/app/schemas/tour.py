@@ -1,7 +1,7 @@
 """Pydantic schemas for Tour Packages."""
 
-from pydantic import BaseModel, Field
-from typing import Optional
+from pydantic import BaseModel, Field, model_validator
+from typing import Optional, Literal
 from datetime import datetime
 
 
@@ -13,7 +13,18 @@ class TourBase(BaseModel):
     description_ru: str
     description_en: str
     description_fr: str
-    price: float = Field(..., gt=0)
+    category: Literal["full", "extra"] = "full"
+    price: Optional[float] = Field(None, gt=0)
+    is_negotiable: bool = False
+
+    @model_validator(mode="after")
+    def check_price_or_negotiable(self):
+        """Price is required unless is_negotiable is True."""
+        if not self.is_negotiable and self.price is None:
+            raise ValueError("Price is required when tour is not negotiable")
+        if self.is_negotiable:
+            self.price = None
+        return self
     duration_days: int = Field(..., gt=0)
     destination: str = Field(..., max_length=255)
     itinerary_json: Optional[list[dict]] = None
@@ -35,7 +46,9 @@ class TourUpdate(BaseModel):
     description_ru: Optional[str] = None
     description_en: Optional[str] = None
     description_fr: Optional[str] = None
+    category: Optional[Literal["full", "extra"]] = None
     price: Optional[float] = None
+    is_negotiable: Optional[bool] = None
     duration_days: Optional[int] = None
     destination: Optional[str] = None
     itinerary_json: Optional[list[dict]] = None

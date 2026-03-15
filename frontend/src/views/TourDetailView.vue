@@ -14,7 +14,7 @@
             <h1>{{ getField(tour, 'title') }}</h1>
             <div class="tour-detail-meta">
               <span>📅 {{ tour.duration_days }} {{ $t('tours.duration') || 'days' }}</span>
-              <span>💰 €{{ tour.price }} / {{ $t('tours.perPerson') || 'person' }}</span>
+              <span>💰 <template v-if="tour.is_negotiable">{{ $t('tours.negotiable') || 'Negotiable' }}</template><template v-else>€{{ tour.price }} / {{ $t('tours.perPerson') || 'person' }}</template></span>
             </div>
             <button class="btn btn-accent btn-lg" @click="scrollToBooking" style="margin-top:20px;">
               📋 {{ $t('booking.title') || 'Book This Tour' }}
@@ -33,7 +33,7 @@
           <div class="tour-info-card">
             <div class="tour-info-icon">💰</div>
             <div class="tour-info-label">{{ $t('tours.priceLabel') || 'Price' }}</div>
-            <div class="tour-info-value">€{{ tour.price }}</div>
+            <div class="tour-info-value">{{ tour.is_negotiable ? ($t('tours.negotiable') || 'Negotiable') : '€' + tour.price }}</div>
           </div>
           <div class="tour-info-card">
             <div class="tour-info-icon">📅</div>
@@ -108,7 +108,10 @@
         <div v-if="showBooking" class="tour-booking-section" ref="bookingSection">
           <h2 class="tour-detail-section-title">📋 {{ $t('booking.title') || 'Book This Tour' }}</h2>
           <p style="color:var(--text-secondary); margin-bottom:24px; font-size:0.95rem;">
-            <strong>{{ getField(tour, 'title') }}</strong> — €{{ tour.price }} / {{ $t('tours.perPerson') || 'person' }} · {{ tour.duration_days }} {{ $t('tours.days') || 'days' }}
+            <strong>{{ getField(tour, 'title') }}</strong> —
+            <template v-if="tour.is_negotiable">{{ $t('tours.negotiable') || 'Negotiable' }}</template>
+            <template v-else>€{{ tour.price }} / {{ $t('tours.perPerson') || 'person' }}</template>
+            · {{ tour.duration_days }} {{ $t('tours.days') || 'days' }}
           </p>
 
           <div v-if="submitSuccess" class="alert alert-success">

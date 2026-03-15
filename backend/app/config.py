@@ -44,7 +44,7 @@ class Settings(BaseSettings):
     # ── Admin Auth ───────────────────────────────────────────────
     ADMIN_USERNAME: str = "admin"
     ADMIN_PASSWORD: str = "admin2026"
-    JWT_SECRET_KEY: str = "adventures-travel-time-secret-key-change-me"
+    JWT_SECRET_KEY: str = "silk-road-trip-secret-key-change-me"
     JWT_ALGORITHM: str = "HS256"
     JWT_EXPIRE_MINUTES: int = 480  # 8 hours
 
