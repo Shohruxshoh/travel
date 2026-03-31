@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     """Application settings with environment variable loading."""
 
     # ── Application ──────────────────────────────────────────────
-    APP_NAME: str = "Travel Agency API"
+    APP_NAME: str = "Adventure Travel Time API"
     APP_VERSION: str = "1.0.0"
     DEBUG: bool = False
     ALLOWED_ORIGINS: list[str] = ["http://localhost:5173"]
@@ -44,7 +44,7 @@ class Settings(BaseSettings):
     # ── Admin Auth ───────────────────────────────────────────────
     ADMIN_USERNAME: str = "admin"
     ADMIN_PASSWORD: str = "admin2026"
-    JWT_SECRET_KEY: str = "silk-road-trip-secret-key-change-me"
+    JWT_SECRET_KEY: str = "adventures-travel-time-secret-key-change-me"
     JWT_ALGORITHM: str = "HS256"
     JWT_EXPIRE_MINUTES: int = 480  # 8 hours
 

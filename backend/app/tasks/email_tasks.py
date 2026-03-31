@@ -85,7 +85,7 @@ def _build_email_html(booking: Booking, tour: TourPackage) -> str:
             </div>
 
             <p style="color: #888; font-size: 12px; margin-top: 20px; text-align: center;">
-                This notification was sent automatically by the Travel Agency booking system.
+                This notification was sent automatically by the Adventure Travel Time booking system.
             </p>
         </div>
     </body>

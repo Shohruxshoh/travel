@@ -33,7 +33,7 @@ async def lifespan(app: FastAPI):
     - On startup: create all database tables if they don't exist.
     - On shutdown: dispose of the engine connection pool.
     """
-    logger.info("Starting Travel Agency API...")
+    logger.info("Starting Adventure Travel Time API...")
     async with engine.begin() as conn:
         # Import all models so Base.metadata is populated
         import app.models  # noqa: F401
@@ -45,7 +45,7 @@ async def lifespan(app: FastAPI):
     logger.info("Database tables verified/created.")
     yield
     await engine.dispose()
-    logger.info("Travel Agency API shut down.")
+    logger.info("Adventure Travel Time API shut down.")
 
 
 # ── FastAPI app instance ─────────────────────────────────────────

@@ -29,3 +29,4 @@ uploads/
 
 # SSL certificates
 certbot/
+backend/.env

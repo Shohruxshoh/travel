@@ -1,10 +1,10 @@
-# 🚀 Deployment Guide — silk-road-trip.com
+# 🚀 Deployment Guide — adventures-travel-time.com
 
 ## Server Requirements
 - **OS:** Ubuntu 22.04+
 - **RAM:** 2GB+
 - **Docker** + **Docker Compose** installed
-- **Domain:** `silk-road-trip.com` → server IP (A record)
+- **Domain:** `adventures-travel-time.com` → server IP (A record)
 
 ---
 
@@ -33,7 +33,7 @@ nano backend/.env   # Change ADMIN_PASSWORD!
 docker-compose -f docker-compose.prod.yml up --build -d
 ```
 
-✅ Site is now live at `http://silk-road-trip.com`
+✅ Site is now live at `http://adventures-travel-time.com`
 
 ---
 
@@ -43,7 +43,7 @@ docker-compose -f docker-compose.prod.yml up --build -d
 bash ssl-init.sh
 ```
 
-✅ Site is now live at `https://silk-road-trip.com`
+✅ Site is now live at `https://adventures-travel-time.com`
 
 ---
 
@@ -51,7 +51,7 @@ bash ssl-init.sh
 
 ```bash
 docker-compose -f docker-compose.prod.yml ps
-curl -I https://silk-road-trip.com
+curl -I https://adventures-travel-time.com
 ```
 
 ---

@@ -27,7 +27,7 @@
     <div class="navbar-inner">
       <router-link to="/" class="navbar-brand">
         <span class="brand-icon">✈️</span>
-        <span class="brand-text">Silk Road Trip</span>
+        <span class="brand-text">Adventure Travel Time</span>
       </router-link>
 
       <ul class="navbar-links">

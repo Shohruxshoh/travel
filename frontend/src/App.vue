@@ -18,7 +18,7 @@
       <div class="footer-grid">
         <!-- Brand Column -->
         <div class="footer-col">
-          <h4>✈️ Silk Road Trip</h4>
+          <h4>✈️ Adventure Travel Time</h4>
           <p class="footer-brand-desc">
             {{ $t('footer.desc') }}
           </p>

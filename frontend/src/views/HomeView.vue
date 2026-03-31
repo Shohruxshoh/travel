@@ -233,7 +233,7 @@ let slideTimer = null
 const heroSlides = computed(() => [
   {
     image: '/monuments/hero_khiva.jpg',
-    label: 'Silk Road Trip',
+    label: 'Adventure Travel Time',
     title: t('hero.title'),
     subtitle: t('hero.subtitle'),
   },

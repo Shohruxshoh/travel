@@ -1,5 +1,5 @@
 # docker-compose.yml
-# Full-stack Travel Agency: Backend, Frontend, DB, Redis, Celery Worker
+# Full-stack Adventure Travel Time: Backend, Frontend, DB, Redis, Celery Worker
 
 version: "3.9"
 
@@ -16,7 +16,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U travel_user -d travel_db"]
+      test: [ "CMD-SHELL", "pg_isready -U travel_user -d travel_db" ]
       interval: 5s
       retries: 5
 
@@ -26,7 +26,7 @@ services:
     ports:
       - "6379:6379"
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: [ "CMD", "redis-cli", "ping" ]
       interval: 5s
       retries: 5
 
