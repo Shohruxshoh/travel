@@ -54,6 +54,7 @@
         <li><router-link to="/hotels">{{ $t('nav.hotels') }}</router-link></li>
         <li><router-link to="/blog">{{ $t('nav.blog') }}</router-link></li>
         <li><router-link to="/gallery">{{ $t('nav.gallery') }}</router-link></li>
+        <li><router-link to="/comments">💬 {{ $t('nav.comments') }}</router-link></li>
         <li><router-link to="/monuments">{{ $t('nav.monuments') }}</router-link></li>
       </ul>
 

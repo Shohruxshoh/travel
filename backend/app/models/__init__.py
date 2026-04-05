@@ -11,6 +11,7 @@ from app.models.hotel import Hotel
 from app.models.blog import BlogArticle
 from app.models.gallery import GalleryItem
 from app.models.booking import Booking
+from app.models.comment import Comment
 from app.models.operator_config import LanguageOperatorConfig
 
 __all__ = [
@@ -21,4 +22,5 @@ __all__ = [
     "GalleryItem",
     "Booking",
     "LanguageOperatorConfig",
+    "Comment",
 ]

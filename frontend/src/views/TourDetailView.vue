@@ -97,6 +97,9 @@
           <div class="tour-lightbox-counter">{{ lightboxIdx + 1 }} / {{ allImages.length }}</div>
         </div>
 
+        <!-- Comments Section -->
+        <CommentsSection :tourId="tour.id" />
+
         <!-- Book Now CTA -->
         <div style="text-align:center; padding:40px 0;" v-if="!showBooking">
           <button class="btn btn-primary btn-lg" @click="showBooking = true; $nextTick(() => scrollToBooking())">
@@ -169,6 +172,7 @@ import { ref, reactive, computed, onMounted, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import api from '../api/axios.js'
+import CommentsSection from '../components/CommentsSection.vue'
 
 const route = useRoute()
 const { locale, t } = useI18n()

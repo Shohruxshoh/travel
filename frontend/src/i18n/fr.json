@@ -7,7 +7,8 @@
         "blog": "Blog",
         "gallery": "Galerie",
         "contact": "Contact",
-        "monuments": "Monuments"
+        "monuments": "Monuments",
+        "comments": "Avis"
     },
     "hero": {
         "title": "Découvrez la magie de la Route de la Soie",
@@ -255,5 +256,36 @@
         "healthContent": "<p>Aucun vaccin n’est exigé pour les voyageurs en provenance d’Europe. L’Ouzbékistan ne présente pas de risque particulier. Prévoir des médicaments contre la déshydratation, les troubles intestinaux et le mal des montagnes. Se protéger soigneusement du soleil en été. Une petite trousse d’urgence est recommandée</p>",
         "usefulTitle": "Informations Générales",
         "usefulContent": "<p>Téléphone</p><p>Pour appeler l’Ouzbékistan depuis la France, composer le + 998, puis le code de la ville (ex. Tachkent, 71), puis le numéro de votre correspondant.</p><p>Pour appeler la France depuis l’Ouzbékistan, composer le 8 + 10 + 33 + le numéro de votre correspondant à 9 chiffres (sans le 0 initial), ou bien par un portable : + 33  puis le numéro de votre correspondant.</p><p>Internet</p><p>On trouve des Cybercafés un peu partout dans les villes, il y a des connexions dans de nombreux hôtels par la WIFI gratuite !</p><p>Couverture GSM</p><p>Le pays est assez bien couvert pour que le téléphone portable 3 et 4G  soit le meilleur moyen d’appeler ou d’être joint.\nNéanmoins, nous vous conseillons de vous renseigner auprès de votre opérateur (la réception dépend de lui) sur les modalités de connexion au réseau local.</p><p>La population Ouzbèke.</p><p>Les Ouzbeks sont très hospitaliers. Ne soyez pas surpris si des personnes, avec qui vous avez échangé quelques mots, vous invitent chez eux à partager le thé ou le repas. C’est une coutume habituelle. Si vous avez quelques photos sur vous de votre ville, de votre famille, n’hésitez pas à les montrer : ils sont synonymes de gage d’amitié. Il leur faut oublier l’isolement qu’ils ont subi durant l’aire soviétique, et la connaissance d’autres cultures les réjouit.\nQuelques usages locaux :</p><p>Déchaussez-vous pour rentrer dans la maison ou les Mosquées, ou avant de vous asseoir sur les tapis d’une Tchaïkhana (Maison de Thé).</p><p>Couvrez-vous raisonnablement lors des visites des lieux saints</p><p>Respectez le droit qu’à le personnel des Mosquées et Médersas de refuser l’entrée aux femmes et aux non-musulmans (c’est peu fréquent).</p><p>Ne prenez pas de photos dans les lieux saints au moment des prières (toutes confessions confondues)</p><p>Quelques mots d’ouzbeks seront toujours appréciés</p><p>Il n’y a aucun interdit sur les communications verbales entre personnes de sexe opposé</p><p>Moyens de Paiement.</p><p>Le SUM (soum) ne peut être acheté qu’en Ouzbékistan. Il est conseillé de prendre avec soi des $ américains ou des € et de changer lorsque vous avez besoin.\nLes cartes bancaires et les chèques de voyage sont d’un emploi assez peu courant en Ouzbékistan. Il vaut donc mieux venir avec des devises fortes, que vous pourrez changer dans toutes les grandes villes du pays.\nIl existe de nombreuses banques et bureaux de change, et vous pourrez aussi changer dans les hôtels.\nLes banques sont ouvertes de 9h à 13h du lundi au vendredi.\nDemandez toujours un reçu de change pour justifier les dépenses en devises locales au moment de la sortie du pays.\nLes paiements par carte bancaires existent pour les acquisitions importantes (mobilier, tapis…), mais généralement les achats se règlent en espèces. Les coupures en circulation étant de faible montant, il est nécessaire de transporter un assez gros volume de billets.\nLes distributeurs de retrait d’argent ne sont pas nombreux, il est conseillé de se renseigner auprès de votre banque pour connaitre les coordonnées des points de retrait d’argent en Ouzbékistan, ou bien cliquez sur les liens suivants :\nVisa, Mastercard ou American Express\nLes chèques n’existent pas.</p><p>Limitations en Douanes.</p><p>A ce jour, voici les limitations sur les importations et exportations :\nSont autorisés à l’importation :</p><p>1000 cigarettes ou tabac</p><p>2 litres de vin</p><p>Le parfum en quantité raisonnable</p><p>Sont interdits à l’importation :</p><p>Les fruits et les légumes ainsi que les animaux</p><p>Sont interdits à l’exportation :</p><p>Les antiquités et objets d’art, les fourrures. Pour les achats de tapis n’oubliez pas de conserver avec vous la facture d’achat ainsi que le certificat de fabrication qui mentionnera l’âge du tapis. Les tapis anciens ne peuvent être exportés.</p><p>Courant électrique.</p><p>Tout comme en Europe, le courant électrique en Ouzbékistan est de 220 Volts. Les prises de courant sont similaires aux prises européennes. Un adaptateur sera nécessaire pour les fiches type «américaines». Prévoir aussi des appareils électriques en bi-voltage (continent américain).</p><p>Habillement.</p><p>Pour les voyages d’été, les vêtements en coton de couleurs claires sont les mieux adaptés. Mesdames et Mesdemoiselles, évitez les shorts ou jupes ultra-courts et les petites brassières pour respecter la sensibilité des Ouzbeks. Prévoyez un foulard pour couvrir les épaules et les bras lors des visites des lieux saints (Mosquées, Médersas, Eglises chrétiennes, Synagogues). N’oubliez pas le chapeau !!\nPour les circuits d’hiver, emportez des bottes chaudes et des lainages, et des manteaux adaptés au froid. Le vent de Sibérie est glaçant et la nuit, dans le désert, les températures chutent brutalement.</p><p>Vallée de la Ferghana.</p><p>Selon la loi en vigueur sur la circulation des personnes étrangères dans la vallée de la Ferghana, une limite de  quatre (4) personnes par véhicule est autorisée</p>"
+    },
+    "comments": {
+        "title": "Avis des voyageurs",
+        "subtitle": "Partagez votre expérience avec d'autres voyageurs",
+        "writeTitle": "Écrire un avis",
+        "name": "Votre nom",
+        "namePlaceholder": "Entrez votre nom",
+        "country": "Pays",
+        "countryPlaceholder": "D'où venez-vous?",
+        "description": "Votre expérience",
+        "descriptionPlaceholder": "Partagez votre expérience de voyage avec les autres...",
+        "image": "Photo (facultatif)",
+        "imageHint": "Ajoutez une photo de votre voyage",
+        "submit": "Publier l'avis",
+        "submitting": "Publication...",
+        "success": "Votre avis a été publié! Merci.",
+        "error": "Impossible de publier votre avis. Veuillez réessayer.",
+        "noComments": "Soyez le premier à partager votre expérience!",
+        "noCommentsDesc": "Votre avis aide d'autres voyageurs à planifier leur voyage.",
+        "justNow": "À l'instant",
+        "minutesAgo": "il y a {n} min",
+        "hoursAgo": "il y a {n}h",
+        "daysAgo": "il y a {n}j",
+        "imagePreview": "Aperçu de l'image",
+        "removeImage": "Supprimer",
+        "required": "Ce champ est obligatoire",
+        "charCount": "{n} caractères",
+        "reviewCount": "{n} avis",
+        "uploading": "Chargement...",
+        "pageTitle": "Avis des voyageurs",
+        "pageSubtitle": "Lisez de vraies histoires de voyageurs du monde entier. Partagez votre propre voyage inoubliable."
     }
 }

@@ -14,7 +14,7 @@ import os
 
 from app.config import get_settings
 from app.database import engine, Base
-from app.routers import tours, services, hotels, blog, gallery, bookings, admin, auth, upload
+from app.routers import tours, services, hotels, blog, gallery, bookings, admin, auth, upload, comments
 
 # ── Logging setup ────────────────────────────────────────────────
 logging.basicConfig(
@@ -79,6 +79,7 @@ app.include_router(gallery.router, prefix="/api")
 app.include_router(bookings.router, prefix="/api")
 app.include_router(admin.router, prefix="/api")
 app.include_router(upload.router, prefix="/api")
+app.include_router(comments.router, prefix="/api")
 
 # ── Serve uploaded files ─────────────────────────────────────────
 upload_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "uploads")
