@@ -547,7 +547,11 @@ function handleFileChange(e) {
 }
 function handleDrop(e) {
   const file = e.dataTransfer.files?.[0]
-  if (file && file.type.startsWith('image/')) processFile(file)
+  if (!file) return
+  // Allow if type is empty (some browsers return '' for webp/avif) or starts with 'image/'
+  const t = file.type.toLowerCase()
+  if (t && !t.startsWith('image/')) return
+  processFile(file)
 }
 function processFile(file) {
   const reader = new FileReader()
@@ -563,8 +567,11 @@ async function uploadFile(file) {
     const res = await api.post('/comments/upload-image/', fd, { headers: { 'Content-Type': 'multipart/form-data' } })
     imageUrl.value = res.data.url || null
   } catch (e) {
-    console.error('Upload failed:', e)
+    const detail = e.response?.data?.detail || 'Upload failed'
+    submitError.value = detail
+    imagePreview.value = null
     imageUrl.value = null
+    console.error('Upload failed:', detail)
   } finally {
     isUploading.value = false
   }

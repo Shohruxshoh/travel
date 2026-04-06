@@ -19,8 +19,21 @@ from app.schemas.comment import CommentCreate, CommentResponse
 router = APIRouter(prefix="/comments", tags=["Comments"])
 
 UPLOAD_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "uploads")
-ALLOWED_IMG = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
+ALLOWED_IMG = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp", ".tiff", ".avif", ".heic"}
 MAX_IMG_SIZE = 5 * 1024 * 1024  # 5 MB
+
+# Content-Type → extension fallback (when filename has no extension)
+CONTENT_TYPE_MAP = {
+    "image/jpeg": ".jpg",
+    "image/jpg": ".jpg",
+    "image/png": ".png",
+    "image/gif": ".gif",
+    "image/webp": ".webp",
+    "image/bmp": ".bmp",
+    "image/tiff": ".tiff",
+    "image/avif": ".avif",
+    "image/heic": ".heic",
+}
 
 
 @router.get("/", response_model=list[CommentResponse])
@@ -68,10 +81,18 @@ async def create_comment(
 
 @router.post("/upload-image/")
 async def upload_comment_image(file: UploadFile = File(...)):
-    """Upload an image for a comment. Public endpoint, no auth required."""
+    """Upload an image for a comment. Supports jpg, png, gif, webp, bmp, avif etc."""
+    # Determine extension from filename first, then fall back to Content-Type
     ext = os.path.splitext(file.filename or "")[1].lower()
+    if not ext and file.content_type:
+        ext = CONTENT_TYPE_MAP.get(file.content_type.lower(), "")
+
     if ext not in ALLOWED_IMG:
-        raise HTTPException(status_code=400, detail=f"Image type '{ext}' not allowed.")
+        raise HTTPException(
+            status_code=400,
+            detail=f"Image type '{ext or file.content_type}' not allowed. "
+                   f"Allowed: jpg, png, gif, webp, bmp, avif"
+        )
 
     content = await file.read()
     if len(content) > MAX_IMG_SIZE:
