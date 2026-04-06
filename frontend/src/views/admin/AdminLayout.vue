@@ -16,6 +16,7 @@
         <li><router-link to="/admin/blog"><span class="nav-icon">📝</span> Blog</router-link></li>
         <li><router-link to="/admin/gallery"><span class="nav-icon">🖼️</span> Gallery</router-link></li>
         <li><router-link to="/admin/operators"><span class="nav-icon">📧</span> Operators</router-link></li>
+        <li><router-link to="/admin/comments"><span class="nav-icon">💬</span> Comments</router-link></li>
       </ul>
       <div style="padding:16px 20px; margin-top:auto; border-top:1px solid rgba(255,255,255,0.06);">
         <button class="btn btn-outline btn-sm" style="width:100%" @click="handleLogout">🚪 Logout</button>

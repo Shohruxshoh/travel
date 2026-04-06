@@ -110,6 +110,11 @@ const routes = [
                 name: 'AdminGallery',
                 component: () => import('../views/admin/AdminGallery.vue'),
             },
+            {
+                path: 'comments',
+                name: 'AdminComments',
+                component: () => import('../views/admin/AdminComments.vue'),
+            },
         ],
     },
 ]

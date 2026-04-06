@@ -21,6 +21,7 @@ from app.models.blog import BlogArticle
 from app.models.booking import Booking
 from app.models.operator_config import LanguageOperatorConfig
 from app.models.gallery import GalleryItem
+from app.models.comment import Comment
 
 # Schemas
 from app.schemas.tour import TourCreate, TourUpdate, TourResponse
@@ -34,6 +35,7 @@ from app.schemas.booking import (
     OperatorConfigResponse,
 )
 from app.schemas.gallery import GalleryCreate, GalleryResponse
+from app.schemas.comment import CommentResponse
 
 router = APIRouter(
     prefix="/admin",
@@ -361,3 +363,49 @@ async def admin_delete_gallery(item_id: int, db: AsyncSession = Depends(get_db))
     if not item:
         raise HTTPException(status_code=404, detail="Gallery item not found")
     await db.delete(item)
+
+
+# ═══════════════════════════════════════════════════════
+# COMMENTS (read all + edit + delete)
+# ═══════════════════════════════════════════════════════
+@router.get("/comments", response_model=list[CommentResponse])
+async def admin_list_comments(
+    approved: bool | None = None,
+    db: AsyncSession = Depends(get_db),
+):
+    """List all comments. Filter by approved status if provided."""
+    query = select(Comment).order_by(Comment.created_at.desc())
+    if approved is not None:
+        query = query.where(Comment.approved == approved)
+    result = await db.execute(query)
+    return result.scalars().all()
+
+
+@router.put("/comments/{comment_id}", response_model=CommentResponse)
+async def admin_update_comment(
+    comment_id: int,
+    data: dict,
+    db: AsyncSession = Depends(get_db),
+):
+    """Edit author_name, country, description or toggle approved status."""
+    result = await db.execute(select(Comment).where(Comment.id == comment_id))
+    comment = result.scalar_one_or_none()
+    if not comment:
+        raise HTTPException(status_code=404, detail="Comment not found")
+    allowed = {"author_name", "country", "description", "approved"}
+    for field, value in data.items():
+        if field in allowed:
+            setattr(comment, field, value)
+    await db.flush()
+    await db.refresh(comment)
+    return comment
+
+
+@router.delete("/comments/{comment_id}", status_code=204)
+async def admin_delete_comment(comment_id: int, db: AsyncSession = Depends(get_db)):
+    """Permanently delete a comment."""
+    result = await db.execute(select(Comment).where(Comment.id == comment_id))
+    comment = result.scalar_one_or_none()
+    if not comment:
+        raise HTTPException(status_code=404, detail="Comment not found")
+    await db.delete(comment)
